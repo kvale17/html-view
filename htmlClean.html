@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Array Renderer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: #f2f2f2;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        #rendered {
+            background: #fff;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            min-height: 200px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HTML Array Renderer</h1>
+    <p>Paste your HTML array below:</p>
+    <textarea id="input"></textarea>
+    <br>
+    <button onclick="renderHTML()">Render HTML</button>
+
+    <h2>Rendered HTML:</h2>
+    <div id="rendered"></div>
+
+    <script>
+        function renderHTML() {
+            const raw = document.getElementById('input').value;
+            const rendered = document.getElementById('rendered');
+
+            try {
+                // Parse input as JSON array
+                const arr = JSON.parse(raw);
+                if (!Array.isArray(arr)) throw new Error('Input is not a valid array.');
+
+                // Render all HTML in the array
+                rendered.innerHTML = arr.join('');
+            } catch (err) {
+                rendered.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>
