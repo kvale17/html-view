@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full HTML Renderer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 2rem;
-            background: #f2f2f2;
-        }
-
-        textarea {
-            width: 100%;
-            height: 200px;
-            margin-bottom: 1rem;
-            font-family: monospace;
-        }
-
-        button {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-
-        iframe {
-            width: 100%;
-            height: 500px;
-            border: 1px solid #ccc;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML String Renderer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f2f2f2;
+    }
+    textarea {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 1rem;
+      font-family: monospace;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    #rendered {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Full HTML Renderer</h1>
-    <p>Paste your full HTML page below:</p>
-    <textarea id="input"></textarea>
-    <br>
-    <button onclick="renderHTML()">Render HTML</button>
+  <h1>HTML String Renderer</h1>
+  <p>Paste your HTML or JS-style string below:</p>
+  <textarea id="input"></textarea>
+  <br>
+  <button onclick="renderHTML()">Render HTML</button>
 
-    <h2>Rendered HTML Page:</h2>
-    <iframe id="preview"></iframe>
+  <h2>Rendered HTML:</h2>
+  <iframe id="rendered"></iframe>
 
-    <script>
-        function renderHTML() {
-            const raw = document.getElementById('input').value;
-            const iframe = document.getElementById('preview');
-            
-            // Open iframe document and write the full HTML
-            const doc = iframe.contentWindow.document;
-            doc.open();
-            doc.write(raw);
-            doc.close();
+  <script>
+    function renderHTML() {
+      const raw = document.getElementById('input').value;
+      let html = raw;
+
+      try {
+        // If it's a JS-style string, remove surrounding quotes
+        if ((html.startsWith('"') && html.endsWith('"')) || (html.startsWith("'") && html.endsWith("'"))) {
+          html = html.slice(1, -1);
         }
-    </script>
-</body>
 
+        // Convert escaped characters to actual characters
+        html = html.replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\r\\n/g, '\n');
+
+        // Set the iframe srcdoc to render the HTML
+        document.getElementById('rendered').srcdoc = html;
+      } catch (err) {
+        alert('Error rendering HTML: ' + err.message);
+      }
+    }
+  </script>
+</body>
 </html>
 
 
