@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Renderer</title>
+    <title>HTML Array Renderer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,30 +35,6 @@
         }
     </style>
 </head>
-
-<body>
-    <h1>HTML Renderer</h1>
-    <p>Paste your HTML below:</p>
-    <textarea id="input"></textarea>
-    <br>
-    <button onclick="renderHTML()">Render HTML</button>
-
-    <h2>Rendered HTML:</h2>
-    <div id="rendered"></div>
-
-    <script>
-        function renderHTML() {
-            const raw = document.getElementById('input').value;
-            const rendered = document.getElementById('rendered');
-
-            // Directly assign the HTML
-            rendered.innerHTML = raw;
-        }
-    </script>
-</body>
-
-</html>
-
 
 <body>
     <h1>HTML Array Renderer</h1>
