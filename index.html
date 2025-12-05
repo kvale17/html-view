@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Array Renderer</title>
+    <title>HTML Renderer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,8 +37,9 @@
 </head>
 
 <body>
-    <h1>HTML Array Renderer</h1>
-    <p>Paste your HTML array below:</p>
+    <h1>HTML Renderer</h1>
+    <p>Paste your HTML below:</p>
+
     <textarea id="input"></textarea>
     <br>
     <button onclick="renderHTML()">Render HTML</button>
@@ -51,18 +52,11 @@
             const raw = document.getElementById('input').value;
             const rendered = document.getElementById('rendered');
 
-            try {
-                // Parse input as JSON array
-                const arr = JSON.parse(raw);
-                if (!Array.isArray(arr)) throw new Error('Input is not a valid array.');
-
-                // Render all HTML in the array
-                rendered.innerHTML = arr.join('');
-            } catch (err) {
-                rendered.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
-            }
+            // Directly render the raw HTML string
+            rendered.innerHTML = raw;
         }
     </script>
 </body>
 
 </html>
+
